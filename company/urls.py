@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import CompanyListCreateView
+from .views import CompanyCreateView
 
 urlpatterns = [
-    path('companies/', CompanyListCreateView.as_view(), name='company-list-create'),
+    path('create/', CompanyCreateView.as_view(), name='create-company'),
 ]

@@ -8,9 +8,8 @@ class Company(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='owned_companies'
+        null=True, blank=True,  
+        related_name="companies"
     )
     name = models.CharField(max_length=255, unique=True)
     address = models.TextField(blank=True, null=True)
