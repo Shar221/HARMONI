@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from authentication.models import User
 
 
 class Company(models.Model):
@@ -20,6 +21,7 @@ class Company(models.Model):
     subscription_plan = models.CharField(max_length=100, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
+    admin = models.OneToOneField(User, on_delete=models.CASCADE, related_name='company_admin', null=True, blank=True)
 
     class Meta:
         ordering = ['-created_at']
