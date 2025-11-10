@@ -1,12 +1,23 @@
 from rest_framework import generics, permissions
+from rest_framework.response import Response
 from .models import Company
 from .serializers import CompanySerializer
 
 class CompanyCreateView(generics.CreateAPIView):
-    queryset = Company.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = CompanySerializer
-    permission_classes = [permissions.AllowAny]
 
     def perform_create(self, serializer):
-        user = self.request.user if self.request.user.is_authenticated else None
-        serializer.save(owner=user)
+        serializer.save(owner=self.request.user)    
+
+class GetCompanyView(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = CompanySerializer
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        company = getattr(user, 'company', None)
+        if company:
+            serializer = self.get_serializer(company)
+            return Response(serializer.data)
+        return Response({"detail": "No company associated with this user."}, status=404)
