@@ -29,5 +29,7 @@ urlpatterns = [
     path('api/password-reset/confirm/', PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
     path('api/employees/', include('employees.urls')),
     path('api/company/', include('company.urls')),
+    path('api/departments/', include('department.urls')),
+    path('api/subscriptions/', include('subscription.urls')),
 
 ]

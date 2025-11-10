@@ -9,6 +9,7 @@ ROLE_CHOICES = (
 class User(AbstractUser):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='employee')
     company = models.ForeignKey('company.Company', on_delete=models.SET_NULL, null=True, blank=True, related_name='users')
+    department = models.ForeignKey('department.Department', on_delete=models.SET_NULL, null=True, blank=True, related_name='employees')
 
     def __str__(self):
         return self.username

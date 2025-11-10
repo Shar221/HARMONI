@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'employees',
     'core',
     'company',
+    'department',
+    'subscription',
 
 ]
 
